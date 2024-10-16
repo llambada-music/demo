@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/github.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/normalize.css">
+  <link rel="icon" href="llambada-favicon.png" type="image/png">
+	<title>Sing-On-Your-Beat: Simple Text-Controllable Accompaniment Generations</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+ 
+<body>
+
+<div class="container">
+<header role="banner">
+</header>
+
+<main role="main">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+<h1 class="entry-title" itemprop="headline" align="center" ><b>Sing-On-Your-Beat: Simple Text-Controllable Accompaniment Generations</b></h1>
+<section itemprop="entry-text">
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded"> 
+  
+  <div class="centered-link"><a href="#">Paper</a> | Code (coming soon)</div>
+
+  <p align="center">Anonymous</p>
+
+  <h2 id="abstract" style="text-align:center;">Abstract</h2>  
+  <p style="text-align: justify;">Singing is one of the most cherished forms of human entertainment. However, creating a beautiful song requires an accompaniment that complements the vocals and aligns well with the song’s instruments and genre. With advancements in deep learning, previous research has focused on generating suitable accompaniments but often lacks precise alignment with the desired instrumentation and genre. To address this, we propose a straightforward method that enables control over the accompaniment through text prompts, allowing the generation of music that not only complements the vocals but also aligns with the song’s instrumental and genre requirements. Through extensive experiments, we successfully generate 10-second accompaniments using vocal input and text control. Additionally, our method demonstrates robust control over the generated accompaniment based on input prompts, improving alignment with the song’s instrumental and genre needs.</p>
+
+  <figure>
+    <p align="center"><img src="overview.jpg" width="60%"  class="center responsive-image"/></p>
+    <figcaption style="text-align: center;">
+      Visualization of 2 stages during training and inference of the Llambada model.<br>Each token type is in the color as follows: 
+      <span style="color: rgb(255, 209, 7);">vocal semantic tokens</span>, 
+      <span style="color: rgb(255, 145, 0);">vocal coarse tokens</span>, 
+      <span style="color: rgb(110, 164, 245);">clap text token</span>, 
+      <span style="color: rgb(228, 100, 100);">accom semantic token</span>, and 
+      <span style="color: purple;">accom coarse token</span>.
+    </figcaption>
+  </figure>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded"> 
+  <h2 id="sample-1" style="text-align:center;">Comparing with SingSong</h2>
+  <p style="text-align: justify;"></p>
+
+  <div style="overflow-x:auto;">
+    <table style="width:100%; text-align:center;">
+    <thead>
+      <th></th>
+      <th>Sample 1</th>
+      <th>Sample 2</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="width:120px">Prompt</td>
+        <td style="width:450px;padding:10px 20px;">Accompaniment with romantic, acoustic, female vocals, piano, guitar, bass, love song, movie soundtrack</td>
+        <td style="width:450px;padding-bottom:10px 20px;">Accompaniment with romantic, acoustic, female vocals, piano, guitar, bass, love song, movie soundtrack</td>
+      </tr>
+      <tr>
+        <td>Vocal Input</td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-1/vocal.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-2/vocal.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td>Ground Truth<br>Accompaniment</td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-1/accom_gt.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-2/accom_gt.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>SingSong</strong><br>Accompaniment</td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-1/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-2/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>SingSong</strong><br>Mixed</td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-1/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-2/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>Llambada</strong><br>Accompaniment</td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-1/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-2/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>Llambada</strong><br>Mixed</td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-1/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-2/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+  <div style="overflow-x:auto; margin-top:50px">
+    <table style="width:100%; text-align:center;">
+    <thead>
+      <th></th>
+      <th>Sample 3</th>
+      <th>Sample 4</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="width:120px">Prompt</td>
+        <td style="width:450px;padding:10px 20px;">Accompaniment with romantic, female vocals, simple beat, arpeggiated guitar, bass, percussion</td>
+        <td style="width:450px;padding-bottom:10px 20px;">Accompaniment with romantic, acoustic, female vocals, piano, guitar, bass, love song, movie soundtrack</td>
+      </tr>
+      <tr>
+        <td>Vocal Input</td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-3/vocal.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-4/vocal.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td>Ground Truth<br>Accompaniment</td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-3/accom_gt.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-4/accom_gt.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>SingSong</strong><br>Accompaniment</td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-3/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-4/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>SingSong</strong><br>Mixed</td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-3/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/singsong/sample-4/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>Llambada</strong><br>Accompaniment</td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-3/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-4/accom.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+      <tr>
+        <td><strong>Llambada</strong><br>Mixed</td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-3/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+        <td><audio preload='metadata' controls><source src="samples/llambada/sample-4/mixed.mp3" type='audio/mpeg'/>Your browser does not support the audio element.</audio></td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
+
+</section>
+</article>
+</main>
+
+</div>
+</body>
+</html>
